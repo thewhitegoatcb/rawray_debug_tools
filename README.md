@@ -13,12 +13,13 @@ Before using this toolset, make sure you have the following prerequisites instal
 - Git: [Download Link](https://git-scm.com/downloads)
 ## Installation
 
-To install the toolset, unpack TODO: ...
+To install the toolset, unpack [Installation Files](https://github.com/thewhitegoatcb/rawray_debug_tools/releases/)
+And install requirments in the unpacked directory by running:
 ```shell
 pip install -r requirements.txt
 ```
 
-Configure your game's path in `config.json` specified in `game_path` default is: `C:/Program Files (x86)/Steam/steamapps/common/Warhammer Vermintide 2`
+Configure your game's path in `config.json` specified in `game_path`. The default is: `C:/Program Files (x86)/Steam/steamapps/common/Warhammer Vermintide 2`
 
 **Make sure that you use forward slashes**
 ## Typical Usage
@@ -38,8 +39,6 @@ Install debugger addon in RawRay and enable debugging features:
 python toolset.py debugger install
 python toolset.py debugger inject
 ```
-
-
 
 ### Starting the game and debugging
 
