@@ -1,0 +1,15 @@
+{
+	"github_users": {
+		"fatshark-mods" : {
+			"skip_repos" : [".github"]
+		}
+	},
+    "repos": {
+        "VT2_Aussimon" : "https://github.com/Aussiemon/Vermintide-2-JHF-Mods.git"
+    },
+	"github_max_items" : 100,
+	"local_repos_path" : "./sourcemaps/repos",
+    "workspace_path" : "./sourcemaps",
+	"game_path" : "C:/Program Files (x86)/Steam/steamapps/common/Warhammer Vermintide 2",
+    "force_pull": false
+}
