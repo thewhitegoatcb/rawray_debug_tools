@@ -34,6 +34,8 @@ Add the `sourcemap` folder to VSCode Workspace by drag&drop or via `File->Add Fo
 <br>
 
 **Make sure the game is NOT running**<br>
+
+
 Install debugger addon in RawRay and enable debugging features:
 ```shell
 python toolset.py debugger install
@@ -46,6 +48,13 @@ python toolset.py debugger inject
 2. Open VSCode and go to [Run and Debug](https://code.visualstudio.com/docs/editor/debugging),
 Select `Stingray Attach (sourcemaps)` from the `RUN AND DEBUG` drop down menu and attach (F5) or click the <span style="color:green">green play button</span> 
 3. VSCode should attach to the game and pause
+
+## Showcase
+### Logpoints
+https://github.com/thewhitegoatcb/rawray_debug_tools/assets/69012729/8f29a718-87df-4f49-8f72-bb5add4abe87
+
+### Breakpoints And Stepping
+https://github.com/thewhitegoatcb/rawray_debug_tools/assets/69012729/dc7a203b-422d-4348-b198-6cda17e33da4
 
 ## Debugger
 
