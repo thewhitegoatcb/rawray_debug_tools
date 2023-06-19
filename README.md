@@ -46,6 +46,13 @@ python toolset.py debugger install
 Select `Stingray Attach (sourcemaps)` from the `RUN AND DEBUG` drop down menu and attach (F5) or click the <span style="color:green">green play button</span> 
 3. VSCode should attach to the game and pause
 
+## Showcase
+### Logpoints
+https://github.com/thewhitegoatcb/rawray_debug_tools/assets/69012729/8f29a718-87df-4f49-8f72-bb5add4abe87
+
+### Breakpoints And Stepping
+https://github.com/thewhitegoatcb/rawray_debug_tools/assets/69012729/dc7a203b-422d-4348-b198-6cda17e33da4
+
 ## Debugger
 
 The debugger option allows you to install/remove the addon and manipulate the luajit VM used in RawRay for debugging purposes.
