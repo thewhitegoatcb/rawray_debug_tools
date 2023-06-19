@@ -4,34 +4,39 @@ import sys
 
 argv = sys.argv
 
-if len(sys.argv) != 2:
-    print("Missing lua-debug publish path!")
+if len(sys.argv) != 3:
+    print("<lua-debug/publish> <lua-debug-compat/publish>")
     sys.exit(1)
 
-ldbg_path = pathlib.Path(sys.argv[1])
+ldbg_modded_path = pathlib.Path(sys.argv[1])
+ldbg_compat_path = pathlib.Path(sys.argv[2])
 
 def write_zip_folder(zip, src_path, dst_path):
     src_path = pathlib.Path(src_path)
     dst_path = pathlib.PurePath(dst_path)
 
     for p in src_path.rglob("*"):
-        if p.is_file():
+        if p.is_file() and p.suffix != ".pyc":
             rel_path = p.relative_to(src_path)
             zip.write(p, dst_path / rel_path)
 
-with ZipFile('./publish/publish.zip', 'w') as zip_object:
+with ZipFile('./publish/RawRay_Debug_Tools_.zip', 'w') as zip_object:
     write_zip_folder(zip_object, "./helpers", "rawray_debug_tools/helpers/")
     write_zip_folder(zip_object, "./mod_getter", "rawray_debug_tools/mod_getter/")
     write_zip_folder(zip_object, "./unbundler", "rawray_debug_tools/unbundler/")
 
     write_zip_folder(zip_object, "./rawray", "rawray_debug_tools/rawray/")
-    zip_object.write(str(ldbg_path / "runtime/win32-x64/luajit/luadebug.dll"), "rawray_debug_tools/rawray/addons/debugger/runtime/win32-x64/luajit/luadebug.dll")
-    zip_object.write(str(ldbg_path / "runtime/win32-x64/luajit/luajit.dll"), "rawray_debug_tools/rawray/addons/debugger/runtime/win32-x64/luajit/luajit.dll")
-    write_zip_folder(zip_object, str(ldbg_path / "script"), "rawray_debug_tools/rawray/addons/debugger/script")
+
+    zip_object.write(str(ldbg_modded_path / "runtime/win32-x64/luajit/luadebug.dll"), "rawray_debug_tools/rawray/addons/debugger/dbg_modded/runtime/win32-x64/luajit/luadebug.dll")
+    zip_object.write(str(ldbg_modded_path / "runtime/win32-x64/luajit/luajit.dll"), "rawray_debug_tools/rawray/addons/debugger/dbg_modded/runtime/win32-x64/luajit/luajit.dll")
+    write_zip_folder(zip_object, str(ldbg_modded_path / "script"), "rawray_debug_tools/rawray/addons/debugger/dbg_modded/script")
+
+    zip_object.write(str(ldbg_compat_path / "runtime/win32-x64/luajit/luadebug.dll"), "rawray_debug_tools/rawray/addons/debugger/dbg_compat/runtime/win32-x64/luajit/luadebug.dll")
+    write_zip_folder(zip_object, str(ldbg_compat_path / "script"), "rawray_debug_tools/rawray/addons/debugger/dbg_compat/script")
 
     zip_object.write("./sourcemaps/.vscode/launch.json", "rawray_debug_tools/sourcemaps/.vscode/launch.json")
-    zip_object.write("./sourcemaps/game/.gitkeep", "rawray_debug_tools/sourcemaps/game/.gitkeep")
-    zip_object.write("./sourcemaps/repos/.gitkeep", "rawray_debug_tools/sourcemaps/repos/.gitkeep")
+    zip_object.mkdir("rawray_debug_tools/sourcemaps/game/")
+    zip_object.mkdir("rawray_debug_tools/sourcemaps/repos/")
 
     zip_object.write("./__init__.py", "rawray_debug_tools/__init__.py")
     zip_object.write("./config.json", "rawray_debug_tools/config.json")

@@ -50,7 +50,7 @@ def check_rawray_install():
     
     rawray_path = get_rawray_path()
     if not rawray_path or not rawray_path.is_dir():
-        typer.echo(f"RawRay not installed?, run `toolset rawray install`")
+        typer.echo(f"RawRay not installed?")
         return False
     return True
     
@@ -72,7 +72,17 @@ def debugger_install():
     shutil.copytree("./rawray", rawray_path, dirs_exist_ok=True)
     typer.echo(f"Installed debugger addon at {rawray_path} from ./rawray")
 
-@debugger_app.command("inject", help="Replace the luajit VM with the debugger's luajit VM")
+@debugger_app.command("remove", help="Remove the debugger addon from RawRay")
+def debugger_remove():
+    if not check_rawray_install():
+        return
+    
+    rawray_path = get_rawray_path()
+    
+    shutil.rmtree(rawray_path / "addons/debugger")
+    typer.echo(f"Removed debugger addon")
+
+@debugger_app.command("inject", help="Replace the luajit VM with the debugger's luajit VM, NOT RECOMMENDED")
 def debugger_inject():
     if not check_rawray_install():
         return
@@ -83,11 +93,10 @@ def debugger_inject():
     rawray_path = get_rawray_path()
 
     paths = (game_path / 'binaries/lua51.dll', game_path / 'binaries_dx12/lua51.dll')
-    luajit2_path = rawray_path / 'addons/debugger/runtime/win32-x64/luajit/luajit.dll'
+    luajit2_path = rawray_path / 'addons/debugger/dbg_modded/runtime/win32-x64/luajit/luajit.dll'
 
     for path in paths:
         helpers.debugger_injector.inject(path, luajit2_path)
-
 
 @debugger_app.command("eject", help="Restore luajit to the original state")
 def debugger_eject():
@@ -101,7 +110,6 @@ def debugger_eject():
     paths = (game_path / 'binaries/lua51.dll', game_path / 'binaries_dx12/lua51.dll')
     for path in paths:
         helpers.debugger_injector.eject(path)
-
 
 @sourcemap_app.command("game", help="Generate game sourcemaps from the bundle files")
 def sourcemap_game():

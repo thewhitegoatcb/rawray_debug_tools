@@ -6,5 +6,8 @@ local function dofile(filename, ...)
     return assert(load(str, "=(debugger.lua)"))(...)
 end
 
-local path = rr.root_dir .."/addons/debugger"
-return dofile(path .. "/script/debugger.lua", path)
+local function start_at(path)
+    return dofile(path .. "/script/debugger.lua", path)
+end
+
+return start_at

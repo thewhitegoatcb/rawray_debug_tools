@@ -13,7 +13,7 @@
             "justMyCode": true,
             "args": [
                 "--config", "./config.json",
-                "sourcemap", "mods"
+                "sourcemap", "game"
             ]
         }
     ]
